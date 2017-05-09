@@ -1,0 +1,94 @@
+﻿
+<div data-ng-controller="vehicleController" class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <strong class="error">{{ error }}</strong>
+            <br />
+            <br />
+            <p data-ng-hide="addMode"><a data-ng-click="toggleAdd()" href="javascript:;" class="btn btn-success">Add New</a></p>
+            <form name="addVehicle" data-ng-show="addMode" style="width:100%;margin:0px auto;">
+                <div class="form-group">
+                    <label for="cplate" class="col-sm-4 control-label">Plate:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="cplate" placeholder="please enter vehicle plate" data-ng-model="editvehicle.plate" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cvehicles_document" class="col-sm-4 control-label">Document Vehile:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="cvehicles_document" placeholder="please enter document vehicle" data-ng-model="editvehicle.vehicles_document" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cowner" class="col-sm-4 control-label">Owner:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="cowner" placeholder="please enter vehicle owner" data-ng-model="editvehicle.owner_name" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cowner_document" class="col-sm-4 control-label">Document Owner:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="cowner_document" placeholder="please enter owner document" data-ng-model="editvehicle.owner_document" required />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cblocked" class="col-sm-4 control-label">blocked:</label>
+                    <div class="col-sm-8">
+                        <input type="checkbox" class="checkbox-inline" id="cblocked" data-ng-model="editvehicle.blocked" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4">&nbsp;</label>
+                    <div class="col-sm-8">&nbsp;</div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-4 col-sm-8">
+                        <input type="submit" value="Add" data-ng-hide="!(editvehicle.id == null)" data-ng-click="add()" data-ng-disabled="!addVehicle.$valid" class="btn btn-success" />
+                        <input type="submit" value="Update" data-ng-hide="(editvehicle.id == null)" data-ng-click="save()" data-ng-disabled="!addVehicle.$valid" class="btn btn-primary" />
+                        <input type="button" value="Cancel" data-ng-click="toggleAdd()" class="btn btn-warning" />
+                    </div>
+                </div>
+                <div class="form-group">&nbsp;</div>
+            </form>
+        </div>
+    </div>
+    <div class="row" data-ng-hide="addMode">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover" style="width:100%">
+                    <tr>
+                        <td>ID</td>
+                        <th>Plate</th>
+                        <th>Vehicle</th>
+                        <th>Owner</th>
+                        <th>Document</th>
+                        <th>Blocked</th>
+                        <th></th>
+                    </tr>
+                    <tr data-ng-repeat="v in vehicles">
+                        <td>{{v.id}}</td>
+                        <td>{{v.plate}}</td>
+                        <td>{{v.vehicles_document}}</td>
+                        <td>{{v.owner_name}}</td>
+                        <td>{{v.owner_document}}</td>
+                        <td>{{v.blocked}}</td>
+                        <td>
+                            <p>
+                                <button data-ng-click="toggleEdit(v)" class="btn btn-primary btn-xs" data-title="Edit">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                </button>
+                                <button data-ng-click="deletecustomer(v)" class="btn btn-danger btn-xs" data-title="Delete">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+                <hr />
+            </div>
+        </div>
+    </div>
+    <div id="divLoader" data-ng-show="loading">
+        <img src="Images/ajaxLoader.gif" class="ajaxLoader" />
+    </div>
+</div>
